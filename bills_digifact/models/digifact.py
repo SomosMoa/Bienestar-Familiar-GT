@@ -13,7 +13,7 @@ class account_move_inherit(models.Model):
 
     validation_code = fields.Char(string='Codigo FEL')
     date_validation = fields.Datetime(string='Fecha de Validacion')
-    def validar_factura_electronica_facturacion(self):
+    def validate_invoice(self):
         
         URL_Token="https://felgttestaws.digifact.com.gt/gt.com.fel.api.v3/api/login/get_token"
         Params_token={"Username":"GT.000041545036.TESTUSER","Password":"j6C7&f5?"}
@@ -120,3 +120,8 @@ class account_move_inherit(models.Model):
             datestr= str(date)
             date_time= datetime.strptime(datestr[:19], '%Y-%m-%d %H:%M:%S')
             rec.date_validation= date_time
+
+    def test_datetime_view(self):
+        for rec in self:
+            date= rec.date_validation
+            raise UserError(_('La consulta es %s'%date))
