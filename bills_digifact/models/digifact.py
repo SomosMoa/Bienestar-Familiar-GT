@@ -100,8 +100,9 @@ class account_move_inherit(models.Model):
         header = {"Content-Type": "application/xml","Authorization": token}
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
         response_autorizacion= response.json()
-        date= response_autorizacion.get('Fecha_de_certificacion')
-        date_time= date.replace('T',' ')
+        responsedate= response_autorizacion.get('Fecha_de_certificacion')
+        response_date= responsedate.replace('T',' ')
+        date_time= datetime.datetime.strptime(response_date, '%Y-%m-%d %H:%M:%S')
         autorizacion= response_autorizacion.get('Autorizacion')
         for rec in self:
             rec.date_validation= date_time
