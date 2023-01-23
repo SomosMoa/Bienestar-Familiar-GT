@@ -1,3 +1,2 @@
 requests
 elementpath
-pytz

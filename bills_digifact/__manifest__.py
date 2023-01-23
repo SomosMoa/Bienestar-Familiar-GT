@@ -26,6 +26,5 @@
     'external_dependencies': {
         'python': ['requests'],
         'python': ['elementpath'],
-        'python': ['pytz'],
     },
 }
