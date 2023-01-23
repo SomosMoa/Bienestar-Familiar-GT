@@ -24,6 +24,7 @@ class account_move_inherit(models.Model):
         #now_utc = datetime.now(timezone('UTC'))
         now_utc = datetime.now(timezone('UTC'))
         date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
+        date2= date.replace(' ', 'T')
         #raise UserError(_('La consulta es %s'%date[:19]))
         for rec in self:
             
@@ -32,7 +33,7 @@ class account_move_inherit(models.Model):
             f1= xml.SubElement(root, "dte:SAT",{'ClaseDocumento':"dte"})
             f11 = xml.SubElement(f1, "dte:DTE", {'ID':"DatosCertificados"})
             f2= xml.SubElement(f11, "dte:DatosEmision", {'ID':"DatosEmision"})
-            f31= xml.SubElement(f2, "dte:DatosGenerales", {'Tipo':"FACT", 'FechaHoraEmision': date[:19], 'CodigoMoneda': "GTQ"})
+            f31= xml.SubElement(f2, "dte:DatosGenerales", {'Tipo':"FACT", 'FechaHoraEmision': date2[:19], 'CodigoMoneda': "GTQ"})
             f32= xml.SubElement(f2, "dte:Emisor", {'NITEmisor':"41545036", 'NombreEmisor':"Bienestar Familiar", 'CodigoEstablecimiento':"1", 'NombreComercial':"Bienestar Familiar", 'AfiliacionIVA':"GEN"})
             f321= xml.SubElement(f32, "dte:DireccionEmisor")
             f3211= xml.SubElement(f321, "dte:Direccion")
