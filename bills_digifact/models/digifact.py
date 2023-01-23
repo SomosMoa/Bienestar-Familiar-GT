@@ -4,6 +4,8 @@ import requests
 import elementpath
 import xml.etree.ElementTree as xml
 import datetime
+from pytz import timezone
+import pytz
 
 class account_move_inherit(models.Model):
     _inherit='account.move'
@@ -18,9 +20,8 @@ class account_move_inherit(models.Model):
         resp= response_token.json()
         token= resp.get('Token')
         
-        date= str(datetime.datetime.now().date())
-        time= str(datetime.datetime.now().time())
-        datetimevr=date+"T"+time
+        now_utc = datetime.now(timezone('UTC'))
+        date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
         #raise UserError(_('La consulta es %s'%datetimevr))
         for rec in self:
             
@@ -29,7 +30,7 @@ class account_move_inherit(models.Model):
             f1= xml.SubElement(root, "dte:SAT",{'ClaseDocumento':"dte"})
             f11 = xml.SubElement(f1, "dte:DTE", {'ID':"DatosCertificados"})
             f2= xml.SubElement(f11, "dte:DatosEmision", {'ID':"DatosEmision"})
-            f31= xml.SubElement(f2, "dte:DatosGenerales", {'Tipo':"FACT", 'FechaHoraEmision': datetimevr, 'CodigoMoneda': "GTQ"})
+            f31= xml.SubElement(f2, "dte:DatosGenerales", {'Tipo':"FACT", 'FechaHoraEmision': date[:19], 'CodigoMoneda': "GTQ"})
             f32= xml.SubElement(f2, "dte:Emisor", {'NITEmisor':"41545036", 'NombreEmisor':"Bienestar Familiar", 'CodigoEstablecimiento':"1", 'NombreComercial':"Bienestar Familiar", 'AfiliacionIVA':"GEN"})
             f321= xml.SubElement(f32, "dte:DireccionEmisor")
             f3211= xml.SubElement(f321, "dte:Direccion")
