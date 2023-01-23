@@ -8,7 +8,6 @@
         <field name="arch" type="xml">
             <xpath expr="//header/button[@name='action_invoice_sent']" position="after">
                 <button name="validar_factura_electronica_facturacion" string="Validar Factura Electronica" type="object" attrs="{'invisible':['|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}" class="btn-primary"/>
-                <button name="test_button" string="Prueba" type="object" class="btn-primary"/>
             </xpath>         
             <field name="partner_id" position="after">
                 <field name="validation_code"/>
