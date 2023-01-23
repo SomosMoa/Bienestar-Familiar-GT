@@ -22,7 +22,7 @@ class account_move_inherit(models.Model):
         
         now_utc = datetime.now(timezone('UTC'))
         date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
-        #raise UserError(_('La consulta es %s'%datetimevr))
+        raise UserError(_('La consulta es %s'%date[:19]))
         for rec in self:
             
             #Structure of the XML Format
