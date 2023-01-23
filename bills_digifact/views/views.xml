@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="bills_digifact.list">
+      <field name="name">bills_digifact list</field>
+      <field name="model">bills_digifact.bills_digifact</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="bills_digifact.action_window">
+      <field name="name">bills_digifact window</field>
+      <field name="res_model">bills_digifact.bills_digifact</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="bills_digifact.action_server">
+      <field name="name">bills_digifact server</field>
+      <field name="model_id" ref="model_bills_digifact_bills_digifact"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="bills_digifact" id="bills_digifact.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu 1" id="bills_digifact.menu_1" parent="bills_digifact.menu_root"/>
+    <menuitem name="Menu 2" id="bills_digifact.menu_2" parent="bills_digifact.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="List" id="bills_digifact.menu_1_list" parent="bills_digifact.menu_1"
+              action="bills_digifact.action_window"/>
+    <menuitem name="Server to list" id="bills_digifact" parent="bills_digifact.menu_2"
+              action="bills_digifact.action_server"/>
+
+  </data>
+</odoo>
