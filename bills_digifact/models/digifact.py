@@ -104,7 +104,7 @@ class account_move_inherit(models.Model):
         date_time= datetime.datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
         #raise UserError(_('La consulta es %s'%responsedate))
         autorizacion= response_autorizacion.get('Autorizacion')
-        response_print= date_time +' - '+ responsedate +' - '+ autorizacion
+        response_print= str(date_time) +' - '+ str(responsedate) +' - '+ str(autorizacion)
         raise UserError(_('La consulta es %s'%response_print))
         #for rec in self:
             #rec.date_validation= date_time
