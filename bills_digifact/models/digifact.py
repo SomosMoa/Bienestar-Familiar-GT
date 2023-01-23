@@ -101,10 +101,10 @@ class account_move_inherit(models.Model):
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
         response_autorizacion= response.json()
         date= response_autorizacion.get('Fecha_de_certificacion')
-        datetime= date.replace('T',' ')
+        date_time= date.replace('T',' ')
         autorizacion= response_autorizacion.get('Autorizacion')
         for rec in self:
-            rec.date_validation= datetime
+            rec.date_validation= date_time
             #rec.validation_code= autorizacion
         #raise UserError(_('La consulta es %s'%autorizacion))
 
