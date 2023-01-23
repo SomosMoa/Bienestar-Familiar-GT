@@ -111,8 +111,8 @@ class account_move_inherit(models.Model):
         date_time= datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
         utc_date= date_time.astimezone(pytz.UTC)
         date_utc= utc_date.strftime("%Y-%m-%d %H:%M:%S")
-        #variablex= str(date_time) +' + '+ str(utc_date) +' + ' + responsedate +' + '+ str(date_utc)
-        raise UserError(_('La consulta es %s'%response.text))
+        variablex= str(date_time) +' + '+ str(utc_date) +' + ' + responsedate +' + '+ str(date_utc)
+        raise UserError(_('La consulta es %s'%variablex))
         autorizacion= response_autorizacion.get('Autorizacion')
 
         for rec in self:
