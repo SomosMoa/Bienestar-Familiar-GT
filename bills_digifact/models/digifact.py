@@ -9,8 +9,7 @@ class account_move_inherit(models.Model):
     _inherit='account.move'
 
     validation_code = fields.Char(string='Codigo FEL')
-    date_validation = fields.Datetime(string='Fecha de Validacion')
-    
+    #date_validation = fields.Datetime(string='Fecha de Validacion')
     def validar_factura_electronica_facturacion(self):
         
         URL_Token="https://felgttestaws.digifact.com.gt/gt.com.fel.api.v3/api/login/get_token"
