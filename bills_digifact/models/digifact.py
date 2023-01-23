@@ -3,9 +3,10 @@ from odoo.exceptions import UserError
 import requests
 import elementpath
 import xml.etree.ElementTree as xml
-import datetime
+from datetime import datetime
 from pytz import timezone
 import pytz
+#import datetime
 
 class account_move_inherit(models.Model):
     _inherit='account.move'
@@ -20,6 +21,7 @@ class account_move_inherit(models.Model):
         resp= response_token.json()
         token= resp.get('Token')
         
+        #now_utc = datetime.now(timezone('UTC'))
         now_utc = datetime.now(timezone('UTC'))
         date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
         raise UserError(_('La consulta es %s'%date[:19]))
