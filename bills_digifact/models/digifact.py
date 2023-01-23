@@ -107,7 +107,7 @@ class account_move_inherit(models.Model):
         #raise UserError(_('La consulta es %s'%response.text))
         response_autorizacion= response.json()
         responsedate= response_autorizacion.get('Fecha_de_certificacion')
-        date_time= datetime.datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
+        date_time= datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
         autorizacion= response_autorizacion.get('Autorizacion')
 
         for rec in self:
@@ -117,4 +117,6 @@ class account_move_inherit(models.Model):
     def test_datetime_push(self):
         for rec in self:
             date= datetime.now()
-            rec.date_validation= date[:19]
+            datestr= str(date)
+            date_time= datetime.strptime(datestr[:19], '%Y-%m-%d %H:%M:%S')
+            rec.date_validation= date_time
