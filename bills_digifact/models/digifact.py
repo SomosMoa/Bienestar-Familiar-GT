@@ -66,9 +66,10 @@ class account_move_inherit(models.Model):
                 Descripcion= xml.SubElement(Item, 'dte:Descripcion')
                 Descripcion.text= item.product_id.name
                 PrecioUnitario= xml.SubElement(Item, 'dte:PrecioUnitario')
-                PrecioUnitario.text= str(item.price_unit)
+                PrecioUnitario.text= str(round(item.price_unit,2))
                 Precio= xml.SubElement(Item, 'dte:Precio')
-                Precio.text= str((item.price_subtotal+(item.price_subtotal*(item.tax_ids.amount/100))))
+                price=(item.price_subtotal+(item.price_subtotal*(item.tax_ids.amount/100)))
+                Precio.text= str(round(price,2))
                 Descuento= xml.SubElement(Item, 'dte:Descuento')
                 Descuento.text= "0"
                 Impuestos =  xml.SubElement(Item, "dte:Impuestos")
@@ -83,7 +84,8 @@ class account_move_inherit(models.Model):
                 tax= item.price_subtotal * (item.tax_ids.amount/100)
                 MontoImpuesto.text = str(round(tax,2))
                 Total =  xml.SubElement(Item, "dte:Total")
-                Total.text = str((item.price_subtotal+(item.price_subtotal*(item.tax_ids.amount/100))))
+                #Totale=(item.price_subtotal+(item.price_subtotal*(item.tax_ids.amount/100)))
+                Total.text = str(round(price,2))
             f36=xml.SubElement(f2, "dte:Totales")
             totalamount= rec.tax_totals.get('amount_total')
             untaxedTotal= rec.tax_totals.get('amount_untaxed')
@@ -91,7 +93,7 @@ class account_move_inherit(models.Model):
             TotalImpuestos= xml.SubElement(f36, "dte:TotalImpuestos")
             TotalImpuesto= xml.SubElement(TotalImpuestos, "dte:TotalImpuesto", {'NombreCorto': "IVA", 'TotalMontoImpuesto':str(round(totalTax,2))})
             GranTotal= xml.SubElement(f36, "dte:GranTotal")
-            GranTotal.text= str(totalamount)
+            GranTotal.text= str(round(totalamount,2))
             tree= xml.tostring(root, encoding='utf8', method='xml', xml_declaration=True)
             
         URLCertificied= "https://felgttestaws.digifact.com.gt/gt.com.fel.api.v3/api/FelRequestV2"
