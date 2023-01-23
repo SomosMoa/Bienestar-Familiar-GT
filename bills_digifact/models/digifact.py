@@ -21,7 +21,7 @@ class account_move_inherit(models.Model):
         date= str(datetime.datetime.now().date())
         time= str(datetime.datetime.now().time())
         datetimevr=date+"T"+time
-        raise UserError(_('La consulta es %s'%datetimevr))
+        #raise UserError(_('La consulta es %s'%datetimevr))
         for rec in self:
             
             #Structure of the XML Format
