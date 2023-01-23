@@ -10,7 +10,7 @@ class account_move_inherit(models.Model):
 
     validation_code = fields.Char(string='Codigo FEL')
     #date_validation = fields.Datetime(string='Fecha de Validacion')
-    """ def validar_factura_electronica_facturacion(self):
+    def validar_factura_electronica_facturacion(self):
         
         URL_Token="https://felgttestaws.digifact.com.gt/gt.com.fel.api.v3/api/login/get_token"
         Params_token={"Username":"GT.000041545036.TESTUSER","Password":"j6C7&f5?"}
@@ -101,4 +101,4 @@ class account_move_inherit(models.Model):
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
         response_autorizacion= response.json()
         autorizacion= response_autorizacion.get('Autorizacion')
-        raise UserError(_('La consulta es %s'%autorizacion)) """
+        raise UserError(_('La consulta es %s'%autorizacion))
