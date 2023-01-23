@@ -102,3 +102,8 @@ class account_move_inherit(models.Model):
         response_autorizacion= response.json()
         autorizacion= response_autorizacion.get('Autorizacion')
         raise UserError(_('La consulta es %s'%autorizacion))
+
+    def test_button(self):
+        for rec in self:
+            response= rec.date_validation
+            raise UserError(_('La consulta es %s'%response))
