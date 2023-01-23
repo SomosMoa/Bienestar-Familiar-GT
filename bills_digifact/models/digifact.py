@@ -99,14 +99,15 @@ class account_move_inherit(models.Model):
         payload= tree
         header = {"Content-Type": "application/xml","Authorization": token}
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
-        response_autorizacion= response.json()
-        responsedate= response_autorizacion.get('Fecha_de_certificacion')
-        date_time= datetime.datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
-        autorizacion= response_autorizacion.get('Autorizacion')
+        raise UserError(_('La consulta es %s'%response.text))
+        # response_autorizacion= response.json()
+        # responsedate= response_autorizacion.get('Fecha_de_certificacion')
+        # date_time= datetime.datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
+        # autorizacion= response_autorizacion.get('Autorizacion')
 
-        for rec in self:
-            rec.date_validation= date_time
-            rec.validation_code= autorizacion
+        # for rec in self:
+        #     rec.date_validation= date_time
+        #     rec.validation_code= autorizacion
 
     def test_button(self):
         for rec in self:
