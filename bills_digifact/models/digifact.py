@@ -24,7 +24,7 @@ class account_move_inherit(models.Model):
         #now_utc = datetime.now(timezone('UTC'))
         now_utc = datetime.now(timezone('UTC'))
         date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
-        raise UserError(_('La consulta es %s'%date[:19]))
+        #raise UserError(_('La consulta es %s'%date[:19]))
         for rec in self:
             
             #Structure of the XML Format
@@ -113,3 +113,8 @@ class account_move_inherit(models.Model):
         for rec in self:
             rec.date_validation= date_time
             rec.validation_code= autorizacion
+
+    def test_datetime_push(self):
+        for rec in self:
+            date= datetime.now()
+            rec.date_validation= date[:19]
