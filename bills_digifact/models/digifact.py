@@ -8,8 +8,8 @@ import datetime
 class account_move_inherit(models.Model):
     _inherit='account.move'
 
-    validation_code = fields.Char()
-    date_validation = fields.DateTime()
+    validation_code = fields.Char(string='Codigo FEL')
+    date_validation = fields.Datetime(string='Fecha de Validacion')
     
     def validar_factura_electronica_facturacion(self):
         
