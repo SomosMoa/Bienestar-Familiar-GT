@@ -108,7 +108,7 @@ class account_move_inherit(models.Model):
         for rec in self:
             rec.date_validation= date_time
             rec.validation_code= autorizacion
-            raise UserError(_('La consulta es %s'%responsedate))
+            #raise UserError(_('La consulta es %s'%responsedate))
 
     def test_button(self):
         for rec in self:
