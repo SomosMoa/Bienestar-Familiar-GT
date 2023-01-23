@@ -102,14 +102,11 @@ class account_move_inherit(models.Model):
         response_autorizacion= response.json()
         responsedate= response_autorizacion.get('Fecha_de_certificacion')
         date_time= datetime.datetime.strptime(responsedate[:19], '%Y-%m-%dT%H:%M:%S')
-        #raise UserError(_('La consulta es %s'%responsedate))
         autorizacion= response_autorizacion.get('Autorizacion')
-        response_print= str(date_time) +' - '+ str(responsedate) +' - '+ str(autorizacion)
-        raise UserError(_('La consulta es %s'%response_print))
-        #for rec in self:
-            #rec.date_validation= date_time
-            #rec.validation_code= autorizacion
-            #raise UserError(_('La consulta es %s'%responsedate))
+
+        for rec in self:
+            rec.date_validation= date_time
+            rec.validation_code= autorizacion
 
     def test_button(self):
         for rec in self:
