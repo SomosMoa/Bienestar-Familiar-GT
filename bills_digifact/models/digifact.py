@@ -117,7 +117,7 @@ class account_move_inherit(models.Model):
             rec.date_validation= date_final
             rec.validation_code= autorizacion
         return {
-            'type': 'ir.action.client',
+            'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params':{
                 'title': _('Ejecucion'),
