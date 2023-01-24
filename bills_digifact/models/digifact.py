@@ -103,28 +103,27 @@ class account_move_inherit(models.Model):
         header = {"Content-Type": "application/xml","Authorization": token}
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
 
-        response_autorizacion= response.json()
-        gtm=pytz.timezone('America/Guatemala')
-        utc= pytz.timezone('UTC')
-        responsedate= response_autorizacion.get('Fecha_de_certificacion')
-        date_time= datetime.strptime(responsedate, '%Y-%m-%dT%H:%M:%S')
-        dategtm= gtm.localize(date_time)
-        dateutc= dategtm.astimezone(utc)
-        date_final= dateutc.strftime("%Y-%m-%d %H:%M:%S")
-        autorizacion= response_autorizacion.get('Autorizacion')
-
-        for rec in self:
-            rec.date_validation= date_final
-            rec.validation_code= autorizacion
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params':{
-                'title': _('Ejecucion'),
-                'message': 'Certificacion Exitosa',
-                'sticky': True,
+        if response.status_code==200:
+            response_autorizacion= response.json()
+            gtm=pytz.timezone('America/Guatemala')
+            utc= pytz.timezone('UTC')
+            responsedate= response_autorizacion.get('Fecha_de_certificacion')
+            date_time= datetime.strptime(responsedate, '%Y-%m-%dT%H:%M:%S')
+            dategtm= gtm.localize(date_time)
+            dateutc= dategtm.astimezone(utc)
+            date_final= dateutc.strftime("%Y-%m-%d %H:%M:%S")
+            autorizacion= response_autorizacion.get('Autorizacion')
+            for rec in self:
+                rec.date_validation= date_final
+                rec.validation_code= autorizacion
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params':{
+                    'title': _('Certificación Exitosa'),
+                    'message': 'La factura ha sido certificada con Exito',
+                    'sticky': True,
+                }
             }
-        }
-
-
-        #raise UserError(_('La consulta es %s'%response.text))
+        else:
+            raise UserError(_('Ha ocurrido un error al ejecutar la operacion'))
