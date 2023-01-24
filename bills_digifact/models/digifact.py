@@ -21,11 +21,9 @@ class account_move_inherit(models.Model):
         resp= response_token.json()
         token= resp.get('Token')
         
-        #now_utc = datetime.now(timezone('UTC'))
         now_utc = datetime.now(timezone('UTC'))
         date= str(now_utc.astimezone(pytz.timezone('America/Guatemala')))
         date2= date.replace(' ', 'T')
-        #raise UserError(_('La consulta es %s'%date[:19]))
         for rec in self:
             
             #Structure of the XML Format
@@ -88,7 +86,6 @@ class account_move_inherit(models.Model):
                 tax= item.price_subtotal * (item.tax_ids.amount/100)
                 MontoImpuesto.text = str(round(tax,2))
                 Total =  xml.SubElement(Item, "dte:Total")
-                #Totale=(item.price_subtotal+(item.price_subtotal*(item.tax_ids.amount/100)))
                 Total.text = str(round(price,2))
             f36=xml.SubElement(f2, "dte:Totales")
             totalamount= rec.tax_totals.get('amount_total')
@@ -105,7 +102,7 @@ class account_move_inherit(models.Model):
         payload= tree
         header = {"Content-Type": "application/xml","Authorization": token}
         response = requests.post(url=URLCertificied, data=payload, headers=header, params=querystring)
-        #raise UserError(_('La consulta es %s'%response.text))
+
         response_autorizacion= response.json()
         gtm=pytz.timezone('America/Guatemala')
         utc= pytz.timezone('UTC')
@@ -114,23 +111,20 @@ class account_move_inherit(models.Model):
         dategtm= gtm.localize(date_time)
         dateutc= dategtm.astimezone(utc)
         date_final= dateutc.strftime("%Y-%m-%d %H:%M:%S")
-        #utc_date= date_time.astimezone(pytz.UTC)
-        #variablex= str(dategtm) +' + '+ str(dateutc)
-        #raise UserError(_('La consulta es %s'%date_final))
         autorizacion= response_autorizacion.get('Autorizacion')
 
         for rec in self:
             rec.date_validation= date_final
             rec.validation_code= autorizacion
+        return {
+            'type': 'ir.action.client',
+            'tag': 'display_notification',
+            'params':{
+                'title': _('Ejecucion'),
+                'message': 'Certificacion Exitosa',
+                'sticky': True,
+            }
+        }
 
-    def test_datetime_push(self):
-        for rec in self:
-            date= datetime.now()
-            datestr= str(date)
-            date_time= datetime.strptime(datestr[:19], '%Y-%m-%d %H:%M:%S')
-            rec.date_validation= date_time
 
-    def test_datetime_view(self):
-        for rec in self:
-            date= rec.date_validation
-            raise UserError(_('La consulta es %s'%date))
+        #raise UserError(_('La consulta es %s'%response.text))
