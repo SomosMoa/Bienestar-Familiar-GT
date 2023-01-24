@@ -116,12 +116,12 @@ class account_move_inherit(models.Model):
         date_final= dateutc.strftime("%Y-%m-%d %H:%M:%S")
         #utc_date= date_time.astimezone(pytz.UTC)
         #variablex= str(dategtm) +' + '+ str(dateutc)
-        raise UserError(_('La consulta es %s'%date_final))
-        #autorizacion= response_autorizacion.get('Autorizacion')
+        #raise UserError(_('La consulta es %s'%date_final))
+        autorizacion= response_autorizacion.get('Autorizacion')
 
-        #for rec in self:
-            #rec.date_validation= dateutc
-            #rec.validation_code= autorizacion
+        for rec in self:
+            rec.date_validation= date_final
+            rec.validation_code= autorizacion
 
     def test_datetime_push(self):
         for rec in self:
