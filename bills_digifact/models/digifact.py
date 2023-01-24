@@ -116,14 +116,14 @@ class account_move_inherit(models.Model):
             for rec in self:
                 rec.date_validation= date_final
                 rec.validation_code= autorizacion
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params':{
-                    'title': _('Certificación Exitosa'),
-                    'message': 'La factura ha sido certificada con Exito',
-                    'sticky': False,
-                }
-            }
+            # return {
+            #     'type': 'ir.actions.client',
+            #     'tag': 'display_notification',
+            #     'params':{
+            #         'title': _('Certificación Exitosa'),
+            #         'message': 'La factura ha sido certificada con Exito',
+            #         'sticky': False,
+            #     }
+            # }
         else:
             raise UserError(_('Ha ocurrido un error al ejecutar la operacion'))
