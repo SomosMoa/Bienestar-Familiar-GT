@@ -122,7 +122,7 @@ class account_move_inherit(models.Model):
                 'params':{
                     'title': _('Certificación Exitosa'),
                     'message': 'La factura ha sido certificada con Exito',
-                    'sticky': True,
+                    'sticky': False,
                 }
             }
         else:
