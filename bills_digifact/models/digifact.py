@@ -126,4 +126,4 @@ class account_move_inherit(models.Model):
             #     }
             # }
         else:
-            raise UserError(_('Ha ocurrido un error al ejecutar la operacion'))
+            raise UserError(_('Ha ocurrido un error al ejecutar la operacion %s'%response.text))
