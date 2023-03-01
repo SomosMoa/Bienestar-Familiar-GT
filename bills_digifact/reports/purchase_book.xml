@@ -4,9 +4,9 @@
         <report
                 id="purchase_book_xlsx"
                 string="Exportar Libro de Compra"
-                model="x_libro_de_compras"
+                model="res.partner"
                 report_type="xlsx"
-                name="x_libro_de_compras.purchase_book_xlsx"
-                file="x_libro_de_compras.purchase_book_xlsx"/>
+                name="bills_digifact.purchase_book_xlsx"
+                file="bills_digifact.purchase_book_xlsx"/>
         </data>
 </odoo>
