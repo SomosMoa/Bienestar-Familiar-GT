@@ -13,6 +13,7 @@
             <field name="partner_id" position="after">
                 <field name="validation_code"/>
                 <field name="date_validation"/>
+                <field name="invoice_code"/>
             </field>
         </field>
     </record>

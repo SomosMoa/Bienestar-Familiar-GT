@@ -16,11 +16,12 @@
     'version': '0.4',
 
     # any module necessary for this one to work correctly
-    'depends': ['account'],
+    'depends': ['account', 'sale_management', 'report_xlsx'],
 
     # always loaded
     'data': [
         'views/digifact_button.xml',
+        'views/sale_inherit'
     ],
     
     'external_dependencies': {

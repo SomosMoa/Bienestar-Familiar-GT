@@ -12,6 +12,7 @@ class account_move_inherit(models.Model):
     _inherit='account.move'
 
     validation_code = fields.Char(string='Codigo FEL')
+    invoice_code = fields.Char(string='Referencia Interna')
     date_validation = fields.Datetime(string='Fecha de Validacion')
     def validate_invoice(self):
         
