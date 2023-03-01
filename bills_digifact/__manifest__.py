@@ -21,7 +21,7 @@
     # always loaded
     'data': [
         'views/digifact_button.xml',
-        'views/sale_inherit'
+        'views/sale_inherit.xml'
     ],
     
     'external_dependencies': {
