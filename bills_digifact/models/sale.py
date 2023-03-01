@@ -4,7 +4,7 @@ class sale_inherit(models.Model):
     _inherit='sale.order'
 
     operation_date = fields.Datetime(string = 'Fecha de Operacion')
-    invoice_fel= fields.char(string='Factura FEL')
+    invoice_fel= fields.Char(string='Factura FEL')
     invoice_code = fields.Char(string='Referencia Interna')
 
     def _prepare_invoice(self):
