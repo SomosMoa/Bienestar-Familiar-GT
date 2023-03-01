@@ -16,7 +16,7 @@
     'version': '0.5',
 
     # any module necessary for this one to work correctly
-    'depends': ['account', 'sale_management', 'report_xlsx'],
+    'depends': ['account', 'sale_management'],
 
     # always loaded
     'data': [
