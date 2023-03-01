@@ -13,10 +13,10 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Uncategorized',
-    'version': '0.6',
+    'version': '0.7',
 
     # any module necessary for this one to work correctly
-    'depends': ['account', 'sale_management', 'report_xlsx'],
+    'depends': ['account', 'sale_management'],
 
     # always loaded
     'data': [
